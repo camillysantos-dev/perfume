@@ -7,8 +7,324 @@
 </head>
 <body>
     <div class="container">
+        <!-- HEADER -->
         <header>
-
+                <style>
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
+            
+                    body {
+                        background: linear-gradient(145deg, #f9f5f0 0%, #f0ebe5 100%);
+                        font-family: 'Poppins', sans-serif;
+                        color: #2c241a;
+                        min-height: 100vh;
+                        padding: 2rem 1rem;
+                    }
+            
+                    /* container principal do menu (estilo cardápio sofisticado) */
+                    .menu-container {
+                        max-width: 1300px;
+                        margin: 0 auto;
+                        background: #fffef7;
+                        border-radius: 2.5rem;
+                        box-shadow: 0 25px 45px -12px rgba(0,0,0,0.25), 0 4px 12px rgba(0,0,0,0.05);
+                        overflow: hidden;
+                        transition: all 0.2s ease;
+                    }
+            
+                    /* cabeçalho com essência floral */
+                    .menu-header {
+                        background: #2e241f;
+                        padding: 2rem 2rem 1.5rem;
+                        text-align: center;
+                        color: #f3ede8;
+                        position: relative;
+                    }
+            
+                    .menu-header::before {
+                        content: "✨";
+                        font-size: 2.2rem;
+                        opacity: 0.3;
+                        position: absolute;
+                        bottom: 10px;
+                        left: 25px;
+                        font-family: monospace;
+                    }
+            
+                    .menu-header::after {
+                        content: "🌸";
+                        font-size: 2rem;
+                        opacity: 0.25;
+                        position: absolute;
+                        top: 15px;
+                        right: 30px;
+                    }
+            
+                    .brand {
+                        font-family: 'Playfair Display', serif;
+                        font-size: 2.5rem;
+                        letter-spacing: -0.5px;
+                        font-weight: 600;
+                        margin-bottom: 0.3rem;
+                    }
+            
+                    .brand span {
+                        font-weight: 300;
+                        font-style: italic;
+                        color: #e3c9a0;
+                    }
+            
+                    .tagline {
+                        font-size: 0.85rem;
+                        text-transform: uppercase;
+                        letter-spacing: 3px;
+                        word-spacing: 2px;
+                        font-weight: 300;
+                        color: #d9c6ae;
+                    }
+            
+                    /* navegação estilo abas / filtros */
+                    .nav-filters {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        gap: 0.5rem;
+                        background: #fff9f2;
+                        padding: 1rem 1.5rem;
+                        border-bottom: 1px solid #f0e2d4;
+                    }
+            
+                    .filter-btn {
+                        background: transparent;
+                        border: none;
+                        font-family: 'Poppins', sans-serif;
+                        font-size: 0.9rem;
+                        font-weight: 500;
+                        padding: 0.6rem 1.6rem;
+                        border-radius: 40px;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                        color: #5e4b38;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                    }
+            
+                    .filter-btn i {
+                        font-size: 1rem;
+                    }
+            
+                    .filter-btn:hover {
+                        background: #efe2d6;
+                        transform: translateY(-2px);
+                    }
+            
+                    .filter-btn.active {
+                        background: #a47764;
+                        color: white;
+                        box-shadow: 0 6px 14px rgba(164, 119, 100, 0.3);
+                    }
+            
+                    /* grid de perfumes */
+                    .perfume-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+                        gap: 2rem;
+                        padding: 2.5rem 2rem;
+                    }
+            
+                    /* card individual */
+                    .perfume-card {
+                        background: white;
+                        border-radius: 2rem;
+                        overflow: hidden;
+                        transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+                        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+                        border: 1px solid #f3e9e0;
+                        cursor: default;
+                    }
+            
+                    .perfume-card:hover {
+                        transform: translateY(-8px);
+                        box-shadow: 0 20px 30px -12px rgba(90, 60, 40, 0.2);
+                        border-color: #e7d5c6;
+                    }
+            
+                    .card-img {
+                        position: relative;
+                        height: 260px;
+                        overflow: hidden;
+                        background: linear-gradient(145deg, #f3ede7, #f9f0e8);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+            
+                    /* ícone decorativo de frasco, mas com ilustração genérica */
+                    .perfume-icon {
+                        font-size: 5rem;
+                        color: #bb8f76;
+                        transition: transform 0.2s;
+                        text-shadow: 2px 4px 12px rgba(0,0,0,0.05);
+                    }
+            
+                    .perfume-card:hover .perfume-icon {
+                        transform: scale(1.02);
+                    }
+            
+                    .badge-category {
+                        position: absolute;
+                        top: 18px;
+                        left: 18px;
+                        background: rgba(46, 36, 31, 0.7);
+                        backdrop-filter: blur(4px);
+                        padding: 4px 12px;
+                        border-radius: 40px;
+                        font-size: 0.7rem;
+                        font-weight: 500;
+                        color: white;
+                        letter-spacing: 0.5px;
+                        font-family: monospace;
+                        text-transform: uppercase;
+                    }
+            
+                    .card-info {
+                        padding: 1.5rem 1.2rem 1.5rem;
+                    }
+            
+                    .perfume-title {
+                        font-family: 'Playfair Display', serif;
+                        font-size: 1.4rem;
+                        font-weight: 600;
+                        margin-bottom: 0.3rem;
+                        color: #2e241f;
+                    }
+            
+                    .perfume-brand {
+                        font-size: 0.75rem;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        color: #9b7b64;
+                        margin-bottom: 0.75rem;
+                        font-weight: 500;
+                    }
+            
+                    .notes {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 6px;
+                        margin: 12px 0;
+                    }
+            
+                    .note {
+                        background: #f7efe8;
+                        padding: 4px 12px;
+                        border-radius: 30px;
+                        font-size: 0.7rem;
+                        font-weight: 500;
+                        color: #7d5f4b;
+                    }
+            
+                    .price {
+                        font-weight: 700;
+                        font-size: 1.3rem;
+                        color: #a4674b;
+                        margin-top: 10px;
+                        display: inline-block;
+                        font-family: monospace;
+                    }
+            
+                    .btn-detail {
+                        margin-top: 1rem;
+                        background: #f0e4da;
+                        border: none;
+                        padding: 8px 0;
+                        width: 100%;
+                        border-radius: 60px;
+                        font-weight: 500;
+                        font-family: 'Poppins', sans-serif;
+                        color: #4f3627;
+                        cursor: pointer;
+                        transition: 0.2s;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 10px;
+                        font-size: 0.8rem;
+                    }
+            
+                    .btn-detail:hover {
+                        background: #e2cfbf;
+                        color: #2e241f;
+                        gap: 14px;
+                    }
+            
+                    /* rodapé com inspiração */
+                    .menu-footer {
+                        background: #f9f2ea;
+                        padding: 1rem 2rem;
+                        text-align: center;
+                        font-size: 0.75rem;
+                        color: #917a67;
+                        border-top: 1px solid #eedfcb;
+                    }
+            
+                    /* mensagem sem itens */
+                    .no-items {
+                        grid-column: 1 / -1;
+                        text-align: center;
+                        padding: 3rem;
+                        font-size: 1.1rem;
+                        color: #a0806a;
+                        background: #fefaf5;
+                        border-radius: 2rem;
+                    }
+            
+                    /* responsividade */
+                    @media (max-width: 680px) {
+                        .menu-header .brand {
+                            font-size: 1.8rem;
+                        }
+                        .filter-btn {
+                            padding: 0.4rem 1rem;
+                            font-size: 0.75rem;
+                        }
+                        .perfume-grid {
+                            padding: 1.5rem;
+                            gap: 1.2rem;
+                        }
+                    }
+                </style>
+        </head>
+        <body>
+            <div class="menu-container">
+                <div class="menu-header">
+                    <div class="brand">OLFATO <span>ateliê</span></div>
+                    <div class="tagline">• CARTE DE PARFUMS •</div>
+                    <div style="font-size: 0.75rem; margin-top: 8px; opacity: 0.7;">Assinaturas olfativas & edições exclusivas</div>
+                </div>
+            
+                <div class="nav-filters" id="filterBar">
+                    <button class="filter-btn active" data-filter="all"><i class="fas fa-circle-info"></i> Todos</button>
+                    <button class="filter-btn" data-filter="amadeirado"><i class="fas fa-tree"></i> Amadeirado</button>
+                    <button class="filter-btn" data-filter="floral"><i class="fas fa-seedling"></i> Floral</button>
+                    <button class="filter-btn" data-filter="citrico"><i class="fas fa-lemon"></i> Cítrico</button>
+                    <button class="filter-btn" data-filter="oriental"><i class="fas fa-moon"></i> Oriental</button>
+                </div>
+            
+                <div class="perfume-grid" id="perfumeGrid">
+                    <!-- os cards serão preenchidos via JavaScript para manter o menu dinâmico e facilitar filtragem -->
+                </div>
+            
+                <div class="menu-footer">
+                    <i class="fas fa-flask"></i> Essências verdadeiras · gotas de poesia  <i class="fas fa-heart" style="color:#c28767;"></i>
+                </div>
+            </div>
+        
+        <script>
         </header>
         <main>
 
